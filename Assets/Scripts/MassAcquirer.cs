@@ -12,6 +12,10 @@ public class MassAcquirer : MonoBehaviour
     [SerializeField] static float mass;
     public TMP_InputField user_InputField;
 
+    void Awake()
+    {
+        mass = 0.0f;
+    }
     
     public void setMass()
     {

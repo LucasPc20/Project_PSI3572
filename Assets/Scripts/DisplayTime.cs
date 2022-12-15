@@ -7,51 +7,103 @@ using TMPro;
 public class DisplayTime : MonoBehaviour
 {
     public TMP_Text yearsText;
-    private int years;
-    private int fps = 200;
+    private float anos;
+    private float mass;
     //Called in the initial frame
     void Start()
     {
-        years = 0;
+        anos = 0.0f;
+        mass = MassAcquirer.getMass();
+        yearsText.text = "";
     }
 
     //Called in every frame
     void Update()
     {
-        years += 1;
-        yearsText.text = "approx. 10000 years";
-        if((years > 10*fps) && (years < 20*fps)) // Nebulosa
+        anos += Time.deltaTime;
+        yearsText.text = "aprox. 10000 anos";
+        if((anos > 10f) && (anos <= 20f)) // Protowatrela
         {
-            yearsText.text = "approx. 100000 years";
+            yearsText.text = "aprox. 100000 anos";
+            return;
         }
 
-        else if((years >= 20*fps) && (years < 30*fps)) // Protoestrela
+        else if((anos > 20f) && (anos <= 30f)) // T-Tauri
         {
-            yearsText.text = "approx. 100000 years";
+            yearsText.text = "aprox. 100 milhões anos";
+            return;
         }
 
-        else if((years > 30*fps) && (years < 40*fps)) // T-Tauri
+
+        if (mass < 1.4) //estrelas de pequena massa em seu nucleo
         {
-            yearsText.text = "approx. 100 million years";
+            if((anos > 30f) && (anos < 40f)) //  sequencia principal
+            {
+                yearsText.text = "aprox. 10 bilhões anos";
+                return;
+            }
+
+            else if((anos > 40f) && (anos < 50f)) // gigante vermelha
+            {
+                yearsText.text = "aprox. 1 bilhão anos";
+                return;
+            }
+
+            else if((anos > 50f) && (anos < 60f)) // Planetary nebula
+            {
+                yearsText.text = "aprox. 40000 anos";
+                return;
+            }
+
+            else if((anos > 60f) && (anos < 70f)) // ana branca
+            {
+                yearsText.text = "aprox. 1 bilhão anos";
+                return;
+            }
+
+            else if (anos >= 70f) // ana negra
+            {
+                yearsText.text = "indefinida";
+                return;
+            }
+
         }
 
-        else if((years > 40*fps) && (years < 50*fps)) // Sequência Principal
+        else //estrelas de grande massa em seu nucleo
         {
-            yearsText.text = "about 10 billion years";
-        }
+            if((anos > 30f) && (anos < 40f)) // Sequência principal massa grande
+            {
+                yearsText.text = "aprox. 20 milhões anos";
+                return;
+            }
 
-        else if((years > 60*fps) && (years < 70*fps)) // Gigante ou SuperGigante Vermelha
-        {
-            yearsText.text = "about 10 billion years";
-        }
+            else if((anos > 40f) && (anos < 50f)) // Supergigante vermelha
+            {
+                yearsText.text = "aprox. 200000 anos";
+                return;
+            }
 
-        
+            else if((anos > 50f) && (anos < 60f)) // Supernova
+            {
+                yearsText.text = "aprox. 100 segundos";
+                return;
+            }
+
+            else if (anos > 60f)
+            {
+                if(mass < 3) // estrela de neutrons
+                {
+                    yearsText.text = "indefinida";
+                    return;
+                }
+            }
+        }
         
         
     }
 
-    public int get_years()
+    public float get_years()
     {
-        return years;
+        return anos;
     }
 }
